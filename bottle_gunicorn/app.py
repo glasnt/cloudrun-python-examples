@@ -1,10 +1,13 @@
-from bottle import route, run
+import bottle
+
+app = bottle.default_app()
 
 
-@route("/")
+@bottle.route("/")
 def hello():
     return "Hello Bottle, with love from gunicorn."
 
 
 if __name__ == "__main__":
-    run(host="localhost", port=8080)
+    bottle.run(host="localhost", port=8080)
+

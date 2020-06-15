@@ -1,3 +1,2 @@
-FROM busybox
-ENV PORT 8080
-CMD while 1; do echo -e "HTTP/1.1 200 OK\n\no/" | nc -l -p $PORT; done
+FROM alpine
+ENTRYPOINT while :; do nc -lp $PORT -e sh -c 'echo -e "HTTP/1.1 200 OK\n\nHello, from netcat"'; done

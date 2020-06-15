@@ -18,7 +18,7 @@ SERVICE=${d%/}
 gcloud beta builds triggers create github \
   --repo-owner glasnt \
   --repo-name cloudrun-python-examples \
-  --branch-pattern latest \
+  --branch-pattern "^latest\$" \
   --build-config cloudbuild.yaml \
   --included-files "${SERVICE}/**" \
   --description ${SERVICE} \

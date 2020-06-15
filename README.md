@@ -1,6 +1,6 @@
 # Cloud Run Python Examples
 
-This repository shows demonstration examples for several different Python web servers, long with several WSGI and ASGI servers. 
+This repository shows demonstration examples for several different Python web servers, along with several WSGI and ASGI servers. 
 
 Each demo can be deployed by clicking the "Run on Google Cloud" button in each repo. 
 

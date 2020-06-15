@@ -7,6 +7,7 @@ import google.auth
 from googleapiclient.discovery import build
 
 app = Flask(__name__)
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
 _, project = google.auth.default()
 region = os.environ.get("REGION", "us-central1")
@@ -31,6 +32,7 @@ def report():
 
     for srv in services["items"]:
         name = srv["metadata"]["name"]
+        url = srv["status"]["url"]
 
         if name == "admin":
             continue
@@ -53,7 +55,8 @@ def report():
             commit_id = None
             finishTime = None
 
-        results[name] = {"commit_id": commit_id, "finishTime": finishTime}
+        results[name] = {"commit_id": commit_id, "finishTime": finishTime,
+                "url": url}
     return jsonify(results)
 
 

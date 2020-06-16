@@ -1,7 +1,8 @@
 import os
 import json
+import httpx
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request, send_file
 
 import google.auth
 from googleapiclient.discovery import build
@@ -13,8 +14,8 @@ _, project = google.auth.default()
 region = os.environ.get("REGION", "us-central1")
 
 
-@app.route("/report")
-def report():
+
+def run_report():
     run = build("run", "v1")
     services = (
         run.projects()
@@ -47,22 +48,54 @@ def report():
                 b
                 for b in builds["builds"]
                 if "buildTriggerId" in b and b["buildTriggerId"] == trigger["id"]
+                and "finishTime" in b.keys()
             ][0]
             commit_id = last_build["substitutions"]["SHORT_SHA"]
             finishTime = last_build["finishTime"]
+            success = last_build["status"] == "SUCCESS"
         else:
             trigger = None
             commit_id = None
             finishTime = None
+            success = None
 
         results[name] = {"commit_id": commit_id, "finishTime": finishTime,
-                "url": url}
-    return jsonify(results)
+                "url": url, "success": success}
+    return results
+
+
+@app.route("/report")
+def report():
+    return jsonify(run_report())
 
 
 @app.route("/")
 def home():
     return "Run /report (may take a while)"
+
+@app.route("/status/<service>.svg")
+def status(service):
+    data = run_report()
+    if service in data.keys():
+        result = data[service]
+
+        if result["success"]:
+            success_color = "success"
+        else:
+            success_color = "critical"
+        commit_id = result["commit_id"]
+    else:
+        commit_id = "unknown"
+        success_color = "inactive"
+
+    shield_url = (f"https://img.shields.io/badge/Latest%20Deployment-{commit_id}-{success_color}"
+                  "?style=flat-square&logo=google-cloud&logoColor=white")
+    resp = httpx.get(shield_url)
+    return resp.content
+
+@app.route("/status")
+def status_home():
+    return str(request.__dict__)
 
 
 if __name__ == "__main__":

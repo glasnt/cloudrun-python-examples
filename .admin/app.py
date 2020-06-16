@@ -111,8 +111,9 @@ def status_image(service):
         commit_id = "unknown"
         success_color = "inactive"
 
-    shield_url = (f"https://img.shields.io/badge/Sample%20Deployment-{commit_id}-{success_color}"
-                  "?style=flat-square&logo=google-cloud&logoColor=white")
+    shield_label = "Last sample deployed at commit".replace(" ", "%20")
+    shield_url = (f"https://img.shields.io/badge/{shield_label}-{commit_id}-{success_color}"
+                   "?style=flat-square&logo=google-cloud&logoColor=white")
     resp = httpx.get(shield_url)
     return Response(resp.content, mimetype="image/svg+xml")
 

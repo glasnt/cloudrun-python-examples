@@ -1,5 +1,7 @@
 # Flask + uwsgi
 
+[![Sample deployment](https://admin-ebpumwrniq-uc.a.run.app/status/flask-uwsgi.svg)](https://flask-uwsgi-ebpumwrniq-uc.a.run.app/)
+
 [![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run)
 
 

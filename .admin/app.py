@@ -88,7 +88,7 @@ def status(service):
         commit_id = "unknown"
         success_color = "inactive"
 
-    shield_url = (f"https://img.shields.io/badge/Latest%20Deployment-{commit_id}-{success_color}"
+    shield_url = (f"https://img.shields.io/badge/Sample%20Deployment-{commit_id}-{success_color}"
                   "?style=flat-square&logo=google-cloud&logoColor=white")
     resp = httpx.get(shield_url)
     return resp.content

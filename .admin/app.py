@@ -1,7 +1,8 @@
 import os
 import json
 import httpx
-
+from babel.dates import format_timedelta
+import dateparser
 from flask import Flask, jsonify, request, send_file, render_template, Response
 
 import google.auth
@@ -78,13 +79,13 @@ def home():
                 div = document.getElementById("results")
                 div.innerHTML = this.responseText;
             }
-            else {
-                console.log("ReadyState: "+this.readyState)
-            }
         };
         xhr.send();
     </script>
     """
+def relative_time(dstr):
+    delta = dateparser.parse("now Z") - dateparser.parse(dstr, settings={"TIMEZONE": "Z"})
+    return f"{format_timedelta(delta)} ago"
 
 @app.route("/status")
 def status():
@@ -93,6 +94,7 @@ def status():
     for key in data.keys():
         state = data[key]
         state["name"] = key
+        state["relativeFinishTime"] = relative_time(state["finishTime"])
         resp.append(state)
     return render_template("index.html", data=resp)
 

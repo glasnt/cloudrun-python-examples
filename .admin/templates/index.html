@@ -4,14 +4,15 @@
 </style>
 <table>
 <tr>
-  <th>Service name</th><th>URL</th><th>Success</th><th>Last Deployment</th><th>Status Badge</th>
+  <th>Service name</th><th>URL</th><th>Success</th><th>Last Deployment</th><th>Relative Time</th><th>Status Badge</th>
 <tr>
 {% for service in data %}
 <tr>
   <td>{{service["name"]}}</td>
-  <td>{{service["url"]}}</td>
+  <td><a href="{{service['url']}}">{{service["url"]}}</a></td>
   <td>{{service["success"]}}</td>
   <td>{{service["finishTime"]}}</td>
+  <td>{{service["relativeFinishTime"]}}</td>
   <td><img src="/status/{{service["name"]}}.svg" alt="status badge"></td>
 </tr>
 {% endfor %}

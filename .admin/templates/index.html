@@ -1,0 +1,17 @@
+<h1>Deployment status</h1>
+<style>
+  td { padding-left: 10px; padding-bottom: 5px;}
+</style>
+<table>
+<tr>
+  <th>Service name</th><th>URL</th><th>Success</th><th>Last Deployment</th><th>Status Badge</th>
+<tr>
+{% for service in data %}
+<tr>
+  <td>{{service["name"]}}</td>
+  <td>{{service["url"]}}</td>
+  <td>{{service["success"]}}</td>
+  <td>{{service["finishTime"]}}</td>
+  <td><img src="/status/{{service["name"]}}.svg" alt="status badge"></td>
+</tr>
+{% endfor %}

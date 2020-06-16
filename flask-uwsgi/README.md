@@ -8,3 +8,5 @@
 Uses [Flask](https://flask.palletsprojects.com/en/1.1.x/) and [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/) (via [pyuwsgi](https://pypi.org/project/pyuwsgi/)).
 
 See also: [Starting your Flask app with uwsgi](https://flask.palletsprojects.com/en/1.1.x/deploying/uwsgi/#starting-your-app-with-uwsgi) (flask.palletsprojects.com)
+
+[![deployment status badge](https://admin-ebpumwrniq-uc.a.run.app/status/flask-uwsgi.svg)](https://flask-uwsgi-ebpumwrniq-uc.a.run.app/)

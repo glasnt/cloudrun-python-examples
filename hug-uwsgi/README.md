@@ -4,3 +4,5 @@
 
 
 Uses [Hug](https://github.com/hugapi/hug) and [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/) (via [pyuwsgi](https://pypi.org/project/pyuwsgi/)).
+
+[![deployment status badge](https://admin-ebpumwrniq-uc.a.run.app/status/hug-uwsgi.svg)](https://hug-uwsgi-ebpumwrniq-uc.a.run.app/)

@@ -38,7 +38,10 @@ def run_report():
             continue
 
         trigger = [
-            t for t in triggers["triggers"] if t["substitutions"]["_SERVICE"] == name
+            t for t in triggers["triggers"] 
+                if "substitutions" in t
+                    and "_SERVICE" in t["substitutions"]
+                    and t["subtitutions"]["_SERVICE"] == name
         ]
         if trigger:
             trigger = trigger[0]

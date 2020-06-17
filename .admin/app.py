@@ -29,7 +29,7 @@ def run_report():
     triggers = cb.projects().triggers().list(projectId=project).execute()
 
     results = {}
-
+    # TODO(glasnt) cleanup
     for srv in services["items"]:
         name = srv["metadata"]["name"]
         url = srv["status"]["url"]
@@ -38,10 +38,10 @@ def run_report():
             continue
 
         trigger = [
-            t for t in triggers["triggers"] 
-                if "substitutions" in t
-                    and "_SERVICE" in t["substitutions"]
-                    and t["subtitutions"]["_SERVICE"] == name
+            t for t in triggers["triggers"]
+                if "substitutions" in t.keys()
+                    and "_SERVICE" in t["substitutions"].keys()
+                    and t["substitutions"]["_SERVICE"] == name
         ]
         if trigger:
             trigger = trigger[0]
@@ -51,10 +51,16 @@ def run_report():
                 for b in builds["builds"]
                 if "buildTriggerId" in b and b["buildTriggerId"] == trigger["id"]
                 and "finishTime" in b.keys()
-            ][0]
-            commit_id = last_build["substitutions"]["SHORT_SHA"]
-            finishTime = last_build["finishTime"]
-            success = last_build["status"] == "SUCCESS"
+            ]
+            if last_build:
+                commit_id = last_build[0]["substitutions"]["SHORT_SHA"]
+                finishTime = last_build[0]["finishTime"]
+                success = last_build[0]["status"] == "SUCCESS"
+            else:
+                trigger = None
+                commit_id = None
+                finishTime = None
+                success = None
         else:
             trigger = None
             commit_id = None
@@ -87,6 +93,8 @@ def home():
     </script>
     """
 def relative_time(dstr):
+    if not dstr:
+        return "(no data)"
     delta = dateparser.parse("now Z") - dateparser.parse(dstr, settings={"TIMEZONE": "Z"})
     return f"{format_timedelta(delta)} ago"
 

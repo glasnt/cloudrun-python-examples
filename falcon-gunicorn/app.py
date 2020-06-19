@@ -2,7 +2,7 @@ import falcon
 class HelloResource:
 
     def on_get(self, req, resp):
-        resp.body = "Hello Falcon, with love from gunicorn"
+        resp.body = "👋 Hello falcon - gunicorn"
 
 
 app = falcon.API()

@@ -1,7 +1,7 @@
 from aiohttp import web
 
 async def index(request):
-    return web.Response(text="Hello AIOHTTP, with love from gunicorn")
+    return web.Response(text="👋 Hello aiohttp - gunicorn")
 
 
 async def myapp():

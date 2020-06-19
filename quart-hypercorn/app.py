@@ -6,5 +6,5 @@ app = Quart(__name__)
 
 @app.route("/")
 async def hello():
-    return "Hello Quart, with love from Hypercorn"
+    return "👋 Hello quart - hypercorn"
 

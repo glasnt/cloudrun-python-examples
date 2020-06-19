@@ -7,7 +7,7 @@ port = os.environ.get('PORT', 8080)
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.write("Hello, from Tornado")
+        self.write("👋 Hello tornado")
 
 def make_app():
     return tornado.web.Application([

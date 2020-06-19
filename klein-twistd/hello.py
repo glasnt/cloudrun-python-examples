@@ -4,6 +4,6 @@ app = Klein()
 
 @app.route("/")
 def hello(request):
-    return 'Hello klein, with love from twistd'
+    return "👋 Hello klein - twistd"
 
 resource = app.resource

@@ -1,2 +1,2 @@
 def function(request):
-    return "👋 Hello from functions-framework"
+    return "👋 Hello from python functions-framework"

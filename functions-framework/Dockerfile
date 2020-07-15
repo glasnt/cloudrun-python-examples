@@ -6,7 +6,6 @@ COPY . .
 
 ENV FUNCTION_TARGET function
 
-RUN pip install gunicorn functions-framework
-RUN pip install -r requirements.txt
+RUN pip install functions-framework
 
 CMD exec functions-framework

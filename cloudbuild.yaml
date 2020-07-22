@@ -1,17 +1,18 @@
 steps:
-    - name: 'gcr.io/cloud-builders/docker'
-      args: ['build', '-t', 'gcr.io/${PROJECT_ID}/${_SERVICE}', '${_SERVICE}/.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/${PROJECT_ID}/${_SERVICE}', '${_SERVICE}/.']
 
-    - name: 'gcr.io/cloud-builders/docker'
-      args: ['push', 'gcr.io/${PROJECT_ID}/${_SERVICE}']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/${PROJECT_ID}/${_SERVICE}']
 
-    - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-      entrypoint: 'gcloud'
-      args: ['run', 'deploy', '${_SERVICE}',
-            '--platform', 'managed', '--region', '${_REGION}',
-            '--image', 'gcr.io/${PROJECT_ID}/${_SERVICE}']
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args: ['run', 'deploy', '${_SERVICE}',
+           '--platform', 'managed', '--region', '${_REGION}',
+           '--image', 'gcr.io/${PROJECT_ID}/${_SERVICE}']
+
 images: 
  - 'gcr.io/${PROJECT_ID}/${_SERVICE}'
 
 substitutions:
-    _REGION: us-central1
+ _REGION: us-central1

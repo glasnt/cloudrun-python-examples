@@ -1,4 +1,12 @@
-# Cloud Run Python Examples
+🚛
+
+These examples have been migrate to the [devrel-demos](https://github.com/GoogleCloudPlatform/devrel-demos) repo. 
+
+🚛
+
+---------------
+
+**Cloud Run Python Examples**
 
 This repository shows demonstration examples for several different Python web servers, along with several WSGI and ASGI servers. 
 
